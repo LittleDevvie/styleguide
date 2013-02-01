@@ -1,0 +1,82 @@
+---
+title: HTML/CSS
+---
+
+<h2>HTML/CSS (v1)</h2>
+<article>
+	<h3>Structure</h3>
+	<ul>
+		<li>IDs and classes should use a single dash to separate words (eg. "vehicle-photo")</li>
+		<li>Use short, descriptive names for classes and ids.</li>
+		<li>Don't put "list" on a ul class or other instances where it's implied. <span class="code">.projects</span> is better than <span class="code">.project-list</span></li>
+		<li>
+			Use the same class with different tags to signify the same model is being represented in different ways.  For example, <span class="code">ul.projects, table.projects, li.project, tr.project, div.project</span> could all be used for a project model.
+		</li>
+		<li>
+			Use multiple classes on a single element if there are sections where a model is using the same tag for different parts of the site.  For example, <span class="code">table.project.full</span> or <span class="code">table.project.small</span>
+		</li>
+		<li>Take advantage of CSS's tag and nesting features to differentiate sections.  For example:
+			<% color_code :html do %>
+<body class="mechanic">
+	<div class="navbar">... navbar stuff ...</div>
+	...
+</div>
+<!-- is better than -->
+<body>
+	<div class="mechanic-navbar">... navbar stuff ...</div>
+	...
+</body>
+			<% end %>
+			This way, we can consolidate the shared style between navbars in the .navbar selector, and use the ".mechanic .navbar" for setting the style specific to the mechanic's navbar.
+		</li>
+	</ul>
+	<h3>Indentation</h3>
+	<ul>
+		<li>Use hard tabs, not spaces</li>
+		<li>Each open and close tag gets its own line, unless it contains a single line of text.</li>
+		<li>Each open tag increases the indentation level and the closing tag decreases it.</li>
+		<li>BR tags are written <% escape_html "<br />" %>.</li>
+	</ul>
+	<h3>Example</h3>
+	HTML:
+	<% color_code :html do %>
+<ul class="projects">
+	<li>
+		<a href="#">Project 1</a>
+		<a href="#">Project 2</a>
+		<a href="#">Project 3</a>
+	</li>
+</ul>
+<div class="project">
+	<h3 class="title">Project Title</h3>
+	<p class="description">
+		Yadda yadda yadda.  This is a long block of text.
+		<span class="quote">E pluberus enum.</span>
+		Lorem ipsum.  Do re mi fa so la ti re.  Etc etc.  ¿Dondé está la biblioteca?
+	</p>
+</div>
+	<% end %>
+	CSS:
+	<% color_code :css do %>
+ul.projects {
+	list-style-type: square;
+}
+
+ul.projects li, li.project {
+	color: #f0f;
+}
+
+div.project {
+	font-family: Monaco, serif;
+}
+
+div.project .description {
+	border: 1px solid #000;
+}
+
+.quote {
+	font-style: italic;
+}
+
+	<% end %>
+</article>
